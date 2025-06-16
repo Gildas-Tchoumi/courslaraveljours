@@ -26,6 +26,7 @@
                       </div>
                       <div class="card-body">
                         <div class="card-block">
+                          <a class="btn btn-primary" href="{{ route('create.units') }}">Add</a>
                           <table class="table">
                             <thead>
                               <tr>
@@ -36,12 +37,19 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                              @foreach ($units as $items )
+                                <tr>
+                                <th scope="row">{{ $items->id }}</th>
+                                <td>{{ $items->name }}</td>
+                                <td>{{ $items->description }}</td>
+                                <td>
+                                  <a class="btn btn-primary" href="{{ route('edit.units',$items->id) }}">Edit</a>
+                                  <a class="btn btn-success" href="#">Detail</a>
+                                  <a class="btn btn-danger" href="{{ route('delete.units',$items->id) }}">Delete</a>
+                                </td>
                               </tr>
+                              @endforeach
+                              
                             </tbody>
                           </table>
                         </div>
