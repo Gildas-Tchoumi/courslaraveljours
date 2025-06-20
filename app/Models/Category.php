@@ -6,13 +6,13 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Unit extends Model
+class Category extends Model
 {
     //
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'note'];
 
-    //permet de recuperer les produits qui ont cette unite
-     public function produits(): HasMany
+   //permet de recuperer les produits qui ont cette category 
+    public function produits(): HasMany
     {
         return $this->hasMany(Product::class);
     }

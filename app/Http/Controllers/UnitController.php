@@ -51,6 +51,29 @@ class UnitController extends Controller
         return view('Units.edit', compact('unite'));
     }
 
+    //fonction pour la mise a jours
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        //rechercher l'unite par son id
+        $unit = Unit::find($id);
+        $unit->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+        //ou encore 
+        // $unit->update();
+        // $unit->name = $request->name;
+        // $unit->description = $request->description;
+        // $unit->save();
+
+        //redirection vers la liste des unites
+        return redirect()->route('list.units');
+    }
+
     // fonction pour supprimer une unite
     public function destroy($id) {
 

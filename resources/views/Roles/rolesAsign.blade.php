@@ -11,24 +11,23 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title-wrap bar-success">
-                                <h4 class="card-title" id="basic-layout-form">Cost Estimation</h4>
+                                <h4 class="card-title" id="basic-layout-form">Asign Roles/h4>
                             </div>
                             <p class="mb-0">This is the most basic and cost estimation form is the default position.</p>
                         </div>
                         <div class="card-body">
                             <div class="px-3">
-                                <form class="form" action="{{ route('update.units',$unite->id) }}" method="POST">
+                                <h2>Assign roles to user : {{ $utilisateur->firstname }} </h2>
+                                <form class="form" action="#" method="POST">
                                     @csrf
                                     <div class="form-body">
-                                        <div class="form-group">
-                                            <label for="companyName">Name</label>
-                                            <input type="text" id="companyName" value="{{ $unite->name }}" class="form-control" name="name">
-                                        </div>
+                                        @foreach ($roles as $r)
+                                            <div class="form-check">
+                                                <input type="checkbox" id="" name="role_id[]" value="{{ $r->id }}" >
+                                                <label for="companyName" class="form-check-label">{{ $r->name }}</label>
+                                            </div>
+                                        @endforeach
 
-                                        <div class="form-group">
-                                            <label for="projectinput8">Description</label>
-                                            <textarea id="projectinput8" rows="5" class="form-control" name="description">{{ $unite->description }}</textarea>
-                                        </div>
                                     </div>
 
                                     <div class="form-actions">

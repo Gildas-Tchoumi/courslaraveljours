@@ -27,19 +27,18 @@
                             <ul class="menu-content">
                                 <li><a href="{{ route('list.units') }}" class="menu-item">List Units</a>
                                 </li>
-                                <li><a href="taskboard.html" class="menu-item">Taskboard</a>
+                                <li><a href="{{ route('list.categories') }}" class="menu-item">List category</a>
                                 </li>
-                                <li><a href="calendar.html" class="menu-item">Calendar</a>
+                                <li><a href="{{ route('list.produits') }}" class="menu-item">List product</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub nav-item"><a href="#"><i class="icon-magnet"></i><span
-                                    data-i18n="" class="menu-title">UI
-                                    Kit</span></a>
+                                    data-i18n="" class="menu-title">Gestion users</span></a>
                             <ul class="menu-content">
-                                <li><a href="color-palette.html" class="menu-item">Color Palette</a>
+                                <li><a href="{{ route('list.roles') }}" class="menu-item">Roles</a>
                                 </li>
-                                <li><a href="grids.html" class="menu-item">Grid</a>
+                                <li><a href="{{ route('list.utilisateurs') }}" class="menu-item">Utilisateurs</a>
                                 </li>
                                 <li><a href="typography.html" class="menu-item">Typography</a>
                                 </li>

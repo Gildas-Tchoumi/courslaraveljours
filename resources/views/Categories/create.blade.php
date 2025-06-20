@@ -17,17 +17,17 @@
                         </div>
                         <div class="card-body">
                             <div class="px-3">
-                                <form class="form" action="{{ route('update.units',$unite->id) }}" method="POST">
+                                <form class="form" action="{{ route('store.categories') }}" method="POST">
                                     @csrf
                                     <div class="form-body">
                                         <div class="form-group">
                                             <label for="companyName">Name</label>
-                                            <input type="text" id="companyName" value="{{ $unite->name }}" class="form-control" name="name">
+                                            <input type="text" id="companyName" class="form-control" name="name">
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="projectinput8">Description</label>
-                                            <textarea id="projectinput8" rows="5" class="form-control" name="description">{{ $unite->description }}</textarea>
+                                            <label for="projectinput8">Note</label>
+                                            <textarea id="projectinput8" rows="5" class="form-control" name="note"></textarea>
                                         </div>
                                     </div>
 
