@@ -18,7 +18,7 @@
                         <div class="card-body">
                             <div class="px-3">
                                 <h2>Assign roles to user : {{ $utilisateur->firstname }} </h2>
-                                <form class="form" action="#" method="POST">
+                                <form class="form" action="{{ route('assign.roles.users', $utilisateur->id) }}" method="POST">
                                     @csrf
                                     <div class="form-body">
                                         @foreach ($roles as $r)

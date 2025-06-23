@@ -48,3 +48,4 @@ Route::post('/store-utilisateurs', [UtilisateurController::class, 'store'] )->na
 
 
 Route::get('/role-assign/{id}', [UtilisateurController::class, 'viewassign'] )->name('assign.roles');
+Route::post('/role-assign/{id}', [UtilisateurController::class, 'rolesassign'] )->name('assign.roles.users');

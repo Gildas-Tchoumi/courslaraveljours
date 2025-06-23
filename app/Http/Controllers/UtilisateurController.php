@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyMail;
 use App\Models\Role;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UtilisateurController extends Controller
 {
@@ -30,6 +32,7 @@ class UtilisateurController extends Controller
             'email' => 'required|email|unique:utilisateurs,email',
             'password' => 'required',
         ]);
+        $messag = "Bienvenue dans notre application, veuillez verifier votre email pour activer votre compte";
         //creation de l'utilisateur
         $utilisateur = Utilisateur::create([
             'firstname' => $request->firstname,
@@ -39,6 +42,8 @@ class UtilisateurController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password), // Hashing the password
         ]);
+        //envoi de l'email de verification
+        Mail::to($utilisateur->email)->send( new VerifyMail($utilisateur,$messag));
 
         return redirect()->route('list.utilisateurs');
     }
@@ -50,5 +55,28 @@ class UtilisateurController extends Controller
         $roles = Role::all();
 
         return view('Roles.rolesAsign', compact('utilisateur', 'roles'));
+    }
+
+    //fonction d'assignation des roles a un utilisateur
+    public function rolesassign(Request $request, $id) {
+        // recherche de l'utilisateur par son id
+        $utilisateur = Utilisateur::find($id);
+
+        //recuper l'utilisateur et lui assigner des roles
+        $utilisateur->roles()->attach($request->role_id);
+
+        // pour retirer un roles a un utilisateur
+        // $utilisateur->roles()->detach($request->role_id);
+
+        // pour mettre a jour les roles d'un utilisateur
+        // $utilisateur->roles()->sync($request->role_id);
+
+        // ajouter un role sans supprimer les anciens roles
+        // $utilisateur->roles()->syncWithoutDetaching($request->role_id);
+
+        // redirection vers la liste des utilisateurs
+        return redirect()->route('list.utilisateurs');
+
+        //is_email_verified
     }
 }
