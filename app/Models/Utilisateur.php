@@ -11,7 +11,7 @@ class Utilisateur extends Model
 {
     use Notifiable;
     //
-    protected $fillable = ['firstname', 'lastname', 'sexe', 'image', 'email', 'password'];
+    protected $fillable = ['firstname', 'lastname', 'sexe', 'image', 'email', 'password','token', 'is_email_verified'];
 
      public function roles(): BelongsToMany
     {

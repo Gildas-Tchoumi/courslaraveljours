@@ -1,20 +1,17 @@
-@extends('Home.master')
+@extends('Auth.Auth')
 
 @section('style')
 @endsection
-
-@section('content')
-    <div class="main-content">
+@section('container') 
         <div class="content-wrapper">
-            <div class="container-fluid">
-                <div class="col-md-6">
+            <h2 class="title m-2 text-uppercase">S'inscrire</h2>
                     <div class="card">
-                        <div class="card-header">
+                        {{-- <div class="card-header">
                             <div class="card-title-wrap bar-success">
                                 <h4 class="card-title" id="basic-layout-form">Cost Estimation</h4>
                             </div>
                             <p class="mb-0">This is the most basic and cost estimation form is the default position.</p>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
                             <div class="px-3">
                                 <form class="form" action="{{ route('store.utilisateurs') }}" method="POST">
@@ -51,19 +48,21 @@
                                     </div>
 
                                     <div class="form-actions">
-                                        <button type="button" class="btn btn-danger mr-1">
+                                        {{-- <button type="button" class="btn btn-danger mr-1">
                                             <i class="icon-trash"></i> Cancel
-                                        </button>
+                                        </button> --}}
                                         <button type="submit" class="btn btn-success">
                                             <i class="icon-note"></i> Save
                                         </button>
+                                        
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
+
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="card-footer grey darken-1">
+                    <p class="text-center">I have account <a href="{{ route('login') }}">Login</a></p>
+                </div>
 @endsection

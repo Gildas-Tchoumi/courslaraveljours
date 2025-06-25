@@ -8,5 +8,6 @@
 </head>
 <body>
     <p>{{ $messag }}</p>
+    <a class="btn btn-info" href="{{ route('verifie.account', $utilisateur->token) }}">Valider votre compte</a>
 </body>
 </html>

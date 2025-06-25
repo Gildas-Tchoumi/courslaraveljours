@@ -26,7 +26,7 @@
                       </div>
                       <div class="card-body">
                         <div class="card-block">
-                          <a class="btn btn-primary" href="{{ route('create.utilisateurs') }}">Add</a>
+                          {{-- <a class="btn btn-primary" href="">Add</a> --}}
                           <table class="table">
                             <thead>
                               <tr>

@@ -8,6 +8,8 @@ use App\Models\Role;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Stringable;
 
 class UtilisateurController extends Controller
 {
@@ -29,9 +31,10 @@ class UtilisateurController extends Controller
             'lastname' => 'required',
             'sexe' => 'required',
             'image' => 'required',
-            'email' => 'required|email|unique:utilisateurs,email',
+            'email' => 'required',
             'password' => 'required',
         ]);
+        $token = Str::random(10);
         $messag = "Bienvenue dans notre application, veuillez verifier votre email pour activer votre compte";
         //creation de l'utilisateur
         $utilisateur = Utilisateur::create([
@@ -40,7 +43,8 @@ class UtilisateurController extends Controller
             'sexe' => $request->sexe,
             'image' => $request->image,
             'email' => $request->email,
-            'password' => bcrypt($request->password), // Hashing the password
+            'password' => bcrypt($request->password),// Hashing the password
+            'token' => $token 
         ]);
         //envoi de l'email de verification
         Mail::to($utilisateur->email)->send( new VerifyMail($utilisateur,$messag));

@@ -16,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('Home.master');
 // });
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'viewlogin'])->name('login');
+Route::get('/create-utilisateurs', [UtilisateurController::class, 'create'] )->name('create.utilisateurs');
+Route::post('/store-utilisateurs', [UtilisateurController::class, 'store'] )->name('store.utilisateurs');
+
+
+
+Route::get('/index', [HomeController::class, 'index'])->name('index');
 
 //Routes pour gerer les unités
 Route::get('/list-units', [UnitController::class, 'index'])->name('list.units');
@@ -43,9 +49,9 @@ Route::post('/store-roles', [RoleController::class, 'store'] )->name('store.role
 
 //Routes pour gerer les utilisateurs
 Route::get('/list-utilisateurs', [UtilisateurController::class, 'index'] )->name('list.utilisateurs');
-Route::get('/create-utilisateurs', [UtilisateurController::class, 'create'] )->name('create.utilisateurs');
-Route::post('/store-utilisateurs', [UtilisateurController::class, 'store'] )->name('store.utilisateurs');
+
 
 
 Route::get('/role-assign/{id}', [UtilisateurController::class, 'viewassign'] )->name('assign.roles');
 Route::post('/role-assign/{id}', [UtilisateurController::class, 'rolesassign'] )->name('assign.roles.users');
+Route::get('/verifie-Account/{token}', [HomeController::class, 'verifyAccount'] )->name('verifie.account');
