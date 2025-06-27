@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('role_utilisateurs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('utilisateur_id')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->bigInteger('utilisateur_id')->unsigned();
+            $table->bigInteger('role_id')->unsigned();
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();

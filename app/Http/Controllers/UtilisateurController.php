@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Mail\VerifyMail;
-use App\Models\Role;
-use App\Models\Utilisateur;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Stringable;
+use App\Models\Role;
+use App\Mail\VerifyMail;
+use App\Models\Utilisateur;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\LoginFormRequest;
+use Illuminate\Container\Attributes\Auth;
 
 class UtilisateurController extends Controller
 {
@@ -49,9 +51,34 @@ class UtilisateurController extends Controller
         //envoi de l'email de verification
         Mail::to($utilisateur->email)->send( new VerifyMail($utilisateur,$messag));
 
-        return redirect()->route('list.utilisateurs');
+        return redirect()->route('login');
     }
 
+    // function to login a user
+    public function login(LoginFormRequest $request){
+        //dd($request->all());
+        // login logic here
+        $credentials = $request->only('email', 'password');
+        // dd('Credentials:');
+        // dd($credentials);
+        // dd(auth('utilisateur')->attempt($credentials));
+        if (auth('utilisateur')->attempt($credentials)) {
+            // return redirect()->route('dashboard');
+            // dd('Login successful');
+            // Redirect to the intended page or dashboard
+            $request->session()->regenerate();
+            return redirect()->intended('/list-utilisateurs');
+        } else {
+            // return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+            dd('Login failed');
+        }
+    }
+    // logout function
+    public function logout(Request $request) {
+        // dd($request);
+        auth('utilisateur')->logout();
+        return redirect()->route('login');
+    }
     public function viewassign($id) {
         // recuperer l'utilisateur
         $utilisateur = Utilisateur::find($id);

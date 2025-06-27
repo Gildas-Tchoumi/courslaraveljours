@@ -17,15 +17,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('Home.master');
 // });
 Route::get('/', [HomeController::class, 'viewlogin'])->name('login');
+Route::post('/', [UtilisateurController::class, 'login'])->name('login');
+Route::get('/logout', [UtilisateurController::class, 'logout'])->name('logout')->middleware('auth:utilisateur');
 Route::get('/create-utilisateurs', [UtilisateurController::class, 'create'] )->name('create.utilisateurs');
 Route::post('/store-utilisateurs', [UtilisateurController::class, 'store'] )->name('store.utilisateurs');
-
-
 
 Route::get('/index', [HomeController::class, 'index'])->name('index');
 
 //Routes pour gerer les unités
-Route::get('/list-units', [UnitController::class, 'index'])->name('list.units');
+Route::get('/list-units', [UnitController::class, 'index'])->name('list.units')->middleware('auth:utilisateur');
 Route::get('/create-units', [UnitController::class, 'create'])->name('create.units');
 Route::post('/store-units', [UnitController::class, 'store'])->name('store.units');
 Route::get('/delete-units/{id}', [UnitController::class, 'destroy'])->name('delete.units');
@@ -46,7 +46,6 @@ Route::post('/store-produit', [ProductController::class, 'store'] )->name('store
 Route::get('/list-roles', [RoleController::class, 'index'] )->name('list.roles');
 Route::get('/create-roles', [RoleController::class, 'create'] )->name('create.roles');
 Route::post('/store-roles', [RoleController::class, 'store'] )->name('store.roles');
-
 //Routes pour gerer les utilisateurs
 Route::get('/list-utilisateurs', [UtilisateurController::class, 'index'] )->name('list.utilisateurs');
 
